@@ -9,6 +9,7 @@ from tensorflow.keras import layers
 from tensorflow.keras.layers import Wrapper
 from keras.layers import TimeDistributed
 tf.keras.layers.Wrapper(layer, **kwargs)
+Layer, Wrapper, InputSpec = tf.keras.layers.Layer, tf.keras.layers.Wrapper, tf.keras.layers.InputSpec
 
 def ECG_model(config):
     """ 

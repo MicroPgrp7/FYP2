@@ -6,6 +6,10 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard, ReduceL
 from graph import ECG_model
 from config import get_config
 from utils import *
+import tensorflow as tf  
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.layers import Wrapper
 
 def train(config, X, y, Xval=None, yval=None):
     

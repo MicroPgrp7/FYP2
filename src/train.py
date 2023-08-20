@@ -10,6 +10,8 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers import Wrapper
+from keras.layers import TimeDistributed
+
 
 def train(config, X, y, Xval=None, yval=None):
     

@@ -10,9 +10,9 @@ from tensorflow.keras.layers import Wrapper
 from keras.layers import TimeDistributed
 Layer, Wrapper, InputSpec = tf.keras.layers.Layer, tf.keras.layers.Wrapper, tf.keras.layers.InputSpec
 from tensorflow.keras.layers import Dense
-layer = Dense(10)
+layers = Dense(10)
 from keras import Sequential
-tf.keras.layers.Wrapper(layer, **kwargs)
+tf.keras.layers.Wrapper(layers, **kwargs)
 
 def ECG_model(config):
     """ 

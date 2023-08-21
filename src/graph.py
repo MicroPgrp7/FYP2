@@ -8,7 +8,6 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers import Wrapper
 from keras.layers import TimeDistributed
-Layers, Wrapper, InputSpec = tf.keras.layers.Layer, tf.keras.layers.Wrapper, tf.keras.layers.InputSpec
 from tensorflow.keras.layers import Dense
 layers = Dense(10)
 from keras import Sequential

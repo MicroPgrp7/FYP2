@@ -15,7 +15,7 @@ from tensorflow.keras.layers import Dense
 layers = Dense(10)
 from keras import Sequential
 tf.keras.layers.Wrapper(layers, **kwargs)
-Layer, Wrapper, InputSpec = tf.keras.layers.Layer, tf.keras.layers.Wrapper, tf.keras.layers.InputSpec
+
 
 
 def train(config, X, y, Xval=None, yval=None):

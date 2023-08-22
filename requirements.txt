@@ -1,5 +1,4 @@
-tqdm==4.28.1 
-scipy==1.8.1   
+tqdm==4.28.1  
 scikit-learn==0.21.3
 wfdb==2.2.1
 keras==2.2.5
@@ -12,3 +11,4 @@ Flask==1.1.1
 gevent==1.4.0
 werkzeug==0.16.0
 virtualenv==16.7.7
+scipy==1.8.1  

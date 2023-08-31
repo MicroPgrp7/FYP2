@@ -11,7 +11,7 @@ from keras.layers import TimeDistributed
 from tensorflow.keras.layers import Dense
 layers = Dense(10)
 from keras import Sequential
-tf.keras.layers.Wrapper(layers, **kwargs)
+
 
 def ECG_model(config):
     """ 

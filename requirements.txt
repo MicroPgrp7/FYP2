@@ -10,4 +10,4 @@ Flask==2.3.3
 werkzeug>=2.3.7
 virtualenv==16.7.7
 scipy==1.11.2  
-gevent==22.10
+gevent==23.9.0

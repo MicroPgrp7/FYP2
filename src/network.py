@@ -1,4 +1,9 @@
 from keras import backend as K
+import tensorflow as tf
+from tensorflow.keras import backend as K
+
+# Now 'K' is defined and can be used in your code
+
 
 def _bn_relu(layer, dropout=0, **params):
     from keras.layers import BatchNormalization

@@ -6,6 +6,8 @@ import numpy as np
 from config import get_config
 from utils import *
 import os 
+import tensorflow as tf
+from tensorflow.keras import backend as K
 
 def cincData(config):
     if config.cinc_download:

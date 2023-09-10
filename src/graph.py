@@ -55,7 +55,6 @@ def ECG_model(config):
             def zeropad(x):
                 """ 
                 zeropad and zeropad_output_shapes are from 
-                # https://github.com/awni/ecg/blob/master/ecg/network.py
                 https://github.com/MicroPgrp7/FYP2/blob/main/src/network.py
                 """
                 y = K.zeros_like(x)

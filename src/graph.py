@@ -1,10 +1,9 @@
 from __future__ import division, print_function
 from keras.models import Model
 from keras.layers import Input, Conv1D, Dense, add, Flatten, Dropout,MaxPooling1D, Activation, BatchNormalization, Lambda
-# from keras import backend as K
+import tensorflow as tf
 from tensorflow.keras import backend as K
 from keras.optimizers import Adam
-import tensorflow as tf  
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers import Wrapper

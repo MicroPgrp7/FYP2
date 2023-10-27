@@ -102,7 +102,8 @@ def ECG_model(config):
         outputs = TimeDistributed(Dense(len_classes, activation='softmax'))(layer)
         model = Model(inputs=inputs, outputs=outputs)
         
-        adam = Adam(lr=0.1, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        # adam = Adam(lr=0.1, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+        adam = Adam(lr=0.1, beta_1=0.9, beta_2=0.999)
         model.compile(optimizer= adam,
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])

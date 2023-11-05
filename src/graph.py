@@ -46,6 +46,7 @@ def ECG_model(config):
                         padding='same',
                         strides=1,
                         kernel_initializer='he_normal')(layer)
+        layer = LSTM(1, activation='relu')(layer)
         return add([shortcut, layer])
 
     def main_loop_blocks(layer, config):

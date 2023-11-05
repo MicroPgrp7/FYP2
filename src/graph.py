@@ -11,6 +11,10 @@ from keras.layers import TimeDistributed
 from tensorflow.keras.layers import Dense
 layers = Dense(10)
 from keras import Sequential
+from tensorflow.keras.layers import Input, LSTM, Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Input, SimpleRNN, Dense
+from tensorflow.keras.models import Model
 
 
 def ECG_model(config):

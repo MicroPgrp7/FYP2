@@ -16,7 +16,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Input, SimpleRNN, Dense
 from tensorflow.keras.models import Model
 
-
 def ECG_model(config):
     """ 
     implementation of the model in https://www.nature.com/articles/s41591-018-0268-3 
@@ -50,7 +49,8 @@ def ECG_model(config):
                         padding='same',
                         strides=1,
                         kernel_initializer='he_normal')(layer)
-        layer = LSTM(1, activation='relu')(layer)
+        layer = LSTM(1, activation='relu')(layer) #new
+        # layer = SimpleRNN(1, activation='relu')(layer)  #new
         return add([shortcut, layer])
 
     def main_loop_blocks(layer, config):
@@ -96,6 +96,7 @@ def ECG_model(config):
                             strides= 1,
                             kernel_initializer='he_normal')(layer)
             layer = add([shortcut, layer])
+            
         return layer
 
     def output_block(layer, config):
@@ -103,6 +104,7 @@ def ECG_model(config):
         from tensorflow.keras.layers import TimeDistributed
         layer = BatchNormalization()(layer)
         layer = Activation('relu')(layer)
+
         #layer = Flatten()(layer)
         outputs = TimeDistributed(Dense(len_classes, activation='softmax'))(layer)
         model = Model(inputs=inputs, outputs=outputs)

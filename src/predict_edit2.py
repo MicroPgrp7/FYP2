@@ -6,7 +6,7 @@ import os
 import tensorflow as tf
 from tensorflow.keras.layers import Lambda
 from pathlib import Path
-
+import h5py
 # Add the following import for Keras backend
 from keras import backend as K
 
@@ -51,7 +51,16 @@ def predictByPart(data, peaks):
     print("1234")
     
     # Use K.backend instead of tf.keras.backend
-    model = tf.keras.models.load_model('models/MLII-latest.hdf5')
+    #model = tf.keras.models.load_model('models/MLII-latest.hdf5')
+    # Specify the path to your HDF5 file
+    model= '/content/models/MLII-latest.hdf5'  # Change this to your actual file path
+
+    # Open the HDF5 file
+    with h5py.File(model, 'r') as file:
+      # Access and print information about the contents of the HDF5 file
+      print("Keys: %s" % list(file.keys()))
+      for key in file.keys():
+        print(key)
     print("12345")
     for i, peak in enumerate(peaks[3:-1]):
         total_n = len(peaks)

@@ -56,7 +56,7 @@ def train(config, X, y, Xval=None, yval=None):
             callbacks=callbacks,
             initial_epoch=initial_epoch)
     print_results(config, model, Xvale, yval, classes, )
-
+    model.save('FYP2/src/my_model.h5')  #new add
     #return model
 
 def main(config):

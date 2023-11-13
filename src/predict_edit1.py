@@ -5,14 +5,11 @@ from __future__ import division, print_function
 import numpy as np
 from config import get_config
 from utils import *
-import os
-import tensorflow as tf 
+import os 
+import h5py
 import tensorflow as tf
-from tensorflow.keras.layers import Lambda
-import tensorflow as tf
-from keras.models import load_model
-import numpy as np
-from pathlib import Path
+from tensorflow.keras.models import load_model
+import keras
 
 def cincData(config):
     if config.cinc_download:
@@ -61,35 +58,40 @@ def predict(data, label, peaks, config):
       return predicted, classesM[avgPredict.argmax()], 100*max(avgPredict[0])
 
 def predictByPart(data, peaks):
-    classesM = ['N', 'Ventricular', 'Paced', 'A', 'F', 'Noise']
+    classesM = ['N','Ventricular','Paced','A','F','Noise']#,'L','R','f','j','E','a','J','Q','e','S']
     predicted = list()
     result = ""
-    counter = [0] * len(classesM)
-    print("1234")
-    
-    model = tf.keras.models.load_model('models/MLII-latest.hdf5')
-    print("12345")
-    for i, peak in enumerate(peaks[3:-1]):
-        total_n = len(peaks)
-        start, end = peak - config.input_size // 2, peak + config.input_size // 2
-        prob = model.predict(data[:, start:end])
-        prob = prob[:, 0]
-        ann = np.argmax(prob)
-        counter[ann] += 1
-        if classesM[ann] != "N":
-            print("The {}/{}-record classified as {} with {:3.1f}% certainty".format(i, total_n, classesM[ann],
-                                                                                        100 * prob[0, ann]))
-        result += "(" + classesM[ann] + ":" + str(round(100 * prob[0, ann], 1)) + "%)"
-        predicted.append([classesM[ann], prob])
-        if classesM[ann] != 'N' and prob[0, ann] > 0.95:
-            import matplotlib.pyplot as plt
-            plt.plot(data[:, start:end][0, :, 0], )
-            Path('results').mkdir(parents=True, exist_ok=True)
-            plt.savefig('results/hazard-' + classesM[ann] + '.png', format="png", dpi=300)
-            plt.close()
+    counter = [0]* len(classesM)
+    from keras.models import load_model
+    model = load_model('/content/models/MLII-latest.hdf5')
+    #model= '/content/models/MLII-latest.hdf5'  # Change this to your actual file path
+    print('123')
+    # model = keras.models.load_model('/content/models/MLII-latest.hdf5', custom_objects={'tf': tf})
+    # model_path = '/content/models/MLII-latest.hdf5'
+   
 
-    result += "{}-N, {}-Ventricular, {}-Paced, {}-A, {}-F, {}-Noise".format(counter[0], counter[1], counter[2],
-                                                                          counter[3], counter[4], counter[5])
+    # model = tf.keras.models.load_model(model)
+    print('123')
+    for i, peak in enumerate(peaks[3:-1]):
+      total_n =len(peaks)
+      start, end =  peak-config.input_size//2 , peak+config.input_size//2
+      print('1234')
+      prob = model.predict(data[:, start:end])
+      
+      prob = prob[:,0]
+      ann = np.argmax(prob)
+      counter[ann]+=1
+      if classesM[ann] != "N":
+        print("The {}/{}-record classified as {} with {:3.1f}% certainty".format(i,total_n,classesM[ann],100*prob[0,ann]))
+      result += "("+ classesM[ann] +":" + str(round(100*prob[0,ann],1)) + "%)"
+      predicted.append([classesM[ann],prob])
+      if classesM[ann] != 'N' and prob[0,ann] > 0.95:
+        import matplotlib.pyplot as plt
+        plt.plot(data[:, start:end][0,:,0],)
+        mkdir_recursive('results')
+        plt.savefig('results/hazard-'+classesM[ann]+'.png', format="png", dpi = 300)
+        plt.close()
+    result += "{}-N, {}-Venticular, {}-Paced, {}-A, {}-F, {}-Noise".format(counter[0], counter[1], counter[2], counter[3], counter[4], counter[5])
     return predicted, result
 
 def main(config):

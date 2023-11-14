@@ -6,6 +6,8 @@ import numpy as np
 from config import get_config
 from utils import *
 import os 
+import keras
+import tensorflow.keras.backend as K
 
 def cincData(config):
     if config.cinc_download:
@@ -59,7 +61,8 @@ def predictByPart(data, peaks):
     result = ""
     counter = [0]* len(classesM)
     from keras.models import load_model
-    model = load_model('models/MLII-latest.hdf5')
+    # model = load_model('models/MLII-latest.hdf5')
+    model = keras.models.load_model('/content/models/MLII-latest.hdf5', custom_objects={"K": K})
     config = get_config() 
     for i, peak in enumerate(peaks[3:-1]):
       total_n =len(peaks)

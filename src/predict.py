@@ -43,7 +43,7 @@ def cincData(config):
     return data, label
 
 def predict(data, label, peaks, config):
-    classesM = ['N','Ventricular','Paced','A','F','Noise']
+    classesM = ['Normal','AF','Noise']
     predicted, result  = predictByPart(data, peaks)
     sumPredict = sum(predicted[x][1] for x in range(len(predicted)))
     avgPredict = sumPredict/len(predicted)
@@ -56,7 +56,7 @@ def predict(data, label, peaks, config):
       return predicted, classesM[avgPredict.argmax()], 100*max(avgPredict[0])
 
 def predictByPart(data, peaks):
-    classesM = ['N','Ventricular','Paced','A','F','Noise']#,'L','R','f','j','E','a','J','Q','e','S']
+    classesM = ['N','AF','Noise']#,'L','R','f','j','E','a','J','Q','e','S']
     predicted = list()
     result = ""
     counter = [0]* len(classesM)

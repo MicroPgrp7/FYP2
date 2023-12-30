@@ -123,3 +123,20 @@ https://github.com/awni/ecg
 
 also noticable 
 https://github.com/fernandoandreotti/cinc-challenge2017/tree/master/deeplearn-approach
+
+| Layer Type              | Code                                                   | Description                                                                                        |
+|-------------------------|--------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| Input Layer             | `inputs = Input(shape=(input_size, 1))`               | Defines the input layer with the specified shape.                                                  |
+| Convolutional Layer 1   | `layer = Conv1D(filters=config.filter_length, kernel_size=config.kernel_size, padding='same', strides=1, kernel_initializer='he_normal')(inputs)` | 1D convolutional layer with specified parameters.                                                   |
+| Batch Normalization 1   | `layer = BatchNormalization()(layer)`                  | Applies batch normalization to the previous layer's output.                                        |
+| Activation Layer 1      | `layer = Activation('relu')(layer)`                    | Applies the rectified linear unit (ReLU) activation function to the previous layer's output.       |
+| Max Pooling Layer       | `shortcut = MaxPooling1D(pool_size=1, strides=1)(layer)`| Max pooling layer with pool size 1x1 and stride 1. Used for creating a shortcut connection.          |
+| Convolutional Layer 2   | `layer = Conv1D(filters=config.filter_length, kernel_size=config.kernel_size, padding='same', strides=1, kernel_initializer='he_normal')(layer)` | Another 1D convolutional layer with specified parameters applied to the previous layer's output.    |
+| Batch Normalization 2   | `layer = BatchNormalization()(layer)`                  | Batch normalization applied to the output of the second convolutional layer.                        |
+| Activation Layer 2      | `layer = Activation('relu')(layer)`                    | ReLU activation applied to the output of the second batch normalization layer.                        |
+| Dropout Layer           | `layer = Dropout(config.drop_rate)(layer)`             | Dropout layer with a specified dropout rate applied to the previous layer's output.                 |
+| Convolutional Layer 3   | `layer = Conv1D(filters=config.filter_length, kernel_size=config.kernel_size, padding='same', strides=1, kernel_initializer='he_normal')(layer)` | Another 1D convolutional layer with specified parameters applied to the previous layer's output.    |
+| LSTM Layer              | `layer = LSTM(1, activation='relu')(layer)`           | Long Short-Term Memory (LSTM) layer with 1 unit and ReLU activation applied to the previous layer's output. |
+
+![image](https://github.com/MicroPgrp7/FYP2/assets/105091269/643e5464-0f01-4591-818c-7c356a24d8db)
+

@@ -50,8 +50,6 @@ def predict(data, label, peaks, config):
     print("The average of the predict is:", avgPredict)
     print("The most predicted label is {} with {:3.1f}% certainty".format(classesM[avgPredict.argmax()], 100*max(avgPredict[0])))
     sec_idx = avgPredict.argsort()[0][-2]
-    print("The second predicted label is {} with {:3.1f}% certainty".format(classesM[sec_idx], 100*avgPredict[0][sec_idx]))
-    print("The original label of the record is " + label)
     if config.upload:
       return predicted, classesM[avgPredict.argmax()], 100*max(avgPredict[0])
 

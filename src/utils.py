@@ -195,7 +195,8 @@ def add_noise(config):
         noise = noise.reshape(size,)
         noise = np.nan_to_num(noise) # removing NaNs and Infs
         from scipy.signal import resample
-        noise= resample(noise, int(len(noise) * 360 / 300) ) # resample to match the data sampling rate 360(mit), 300(cinc)
+        noise= resample(noise, int(len(noise) * 360 / 300) ) 
+        # resample to match the data sampling rate 360(mit), 300(cinc)
         from sklearn import preprocessing
         noise = preprocessing.scale(noise)
         noise = noise/1000*6 # rough normalize, to be improved 
@@ -218,7 +219,8 @@ def preprocess(data, config):
       sr = 300
     data = np.nan_to_num(data) # removing NaNs and Infs
     from scipy.signal import resample
-    data = resample(data, int(len(data) * 360 / sr) ) # resample to match the data sampling rate 360(mit), 300(cinc)
+    data = resample(data, int(len(data) * 360 / sr) ) 
+    # resample to match the data sampling rate 360(mit), 300(cinc)
     from sklearn import preprocessing
     data = preprocessing.scale(data)
     from scipy.signal import find_peaks
